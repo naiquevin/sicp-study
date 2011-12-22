@@ -114,3 +114,17 @@
 (define (f n) (A 0 n)) ;; 2n
 (define (g n) (A 1 n)) ;; (0|n=0) ; (2^n|n>0), 
 (define (h n) (A 2 n)) ;; (0|n=0) ; (2|n=1) ; (2^h(n-1))
+
+;; 1.11
+;; A function f is defined by the rule that f(n) = n if n<3 and f(n) = f(n - 1) + 2f(n - 2) + 3f(n -
+;; 3) if n> 3. Write a procedure that computes f by means of a recursive process. Write a procedure that
+;; computes f by means of an iterative process.
+
+(define (f111-rec x)
+  (if (< x 3)
+      x
+      (+ (f111-rec (- x 1))
+               (* 2 (f111-rec (- x 2)))
+               (* 3 (f111-rec (- x 3))))))
+
+(f111-rec 5)
