@@ -128,3 +128,16 @@
                (* 3 (f111-rec (- x 3))))))
 
 (f111-rec 5)
+
+(define (f111-it n)
+  (define (f-iter a b c count)
+    (if (< count 3)
+        a
+        (f-iter (+ a (* 2 b) (* 3 c)) a b (- count 1))))
+  ;; start with the limiting case
+  ;; f(3) = f(2) + 2f(1) + 3f(0)
+  (f-iter 2 1 0 n))
+
+(f111-it 5)
+     
+
