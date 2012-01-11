@@ -124,8 +124,8 @@
   (if (< x 3)
       x
       (+ (f111-rec (- x 1))
-               (* 2 (f111-rec (- x 2)))
-               (* 3 (f111-rec (- x 3))))))
+         (* 2 (f111-rec (- x 2)))
+         (* 3 (f111-rec (- x 3))))))
 
 (f111-rec 5)
 
@@ -141,3 +141,9 @@
 (f111-it 5)
      
 
+;; 1.12 Pascal's Triangle 
+(define (pascal row index)
+  (cond ((< row index) #f)
+        ((or (= row 1) (= index 1) (= row index)) 1)
+        (else (+ (pascal (- row 1) (- index 1))
+                 (pascal (- row 1) index)))))
