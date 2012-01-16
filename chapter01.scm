@@ -147,3 +147,16 @@
         ((or (= row 1) (= index 1) (= row index)) 1)
         (else (+ (pascal (- row 1) (- index 1))
                  (pascal (- row 1) index)))))
+
+;; 1.16 Iterative exponentiation using successive squaring for n%2==0
+(define (fast-expt-i b n)
+  (fast-expt-iter b n 1))
+
+(define (fast-expt-iter b n a)
+  (cond ((= n 0) a)
+        ((even? n)
+         (fast-expt-iter (square b) (/ n 2) a))
+        (else (fast-expt-iter b (- n 1) (* a b)))))
+
+(fast-expt-i 4 6)
+(fast-expt-i 3 9)
