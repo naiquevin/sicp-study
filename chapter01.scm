@@ -160,3 +160,25 @@
 
 (fast-expt-i 4 6)
 (fast-expt-i 3 9)
+
+;; 1.17 Multiplication by repeated adding along with successive doubling
+(define (half a)
+  (/ a 2))
+
+(define (double a)
+  (+ a a))
+
+(define (fast-mult a b)
+  (cond ((= b 0) 0)
+        ((even? b) (fast-mult (double a) (half b)))
+        (else (+ a (fast-mult a (- b 1))))))
+
+;; 1.18 iterative solution for 1.17
+(define (fast-mult-i a b)
+  (fast-mult-iter a b 0))
+
+(define (fast-mult-iter a b s)
+  (cond ((= b 0) s)
+        ((even? b) 
+         (fast-mult-iter (double a) (half b) s))
+        (else (fast-mult-iter a (- b 1) (+ s a)))))
