@@ -182,3 +182,33 @@
         ((even? b) 
          (fast-mult-iter (double a) (half b) s))
         (else (fast-mult-iter a (- b 1) (+ s a)))))
+
+;; 1.20
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+(gcd 206 40)
+;; is (= 40 0)? no
+(gcd 40 (remainder 206 40))
+;; is (= 6 0)? no
+(gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
+;; is (= 0 (remainder 40 (remainder 206 40)))? 
+(gcd (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
+;; is (remainder 6 (remainder 40 6)) ie. (= 0 (remainder 6 4))? no
+(gcd (remainder (remainder 206 40) (remainder 40 (remainder 206 40))) 
+     (remainder (remainder 40 (remainder 206 40))
+                (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))))
+;; (= 0(remainder 4 2)) ? yes
+2
+
+;; So Unique Remainder Operations performed.
+(remainder 206 40)
+(remainder 40 6)
+(remainder 6 4)
+(remainder 4 2)
+
+;; Total remainder operations performed
+(+ 1 3 6 11)
+;; 21 Remainder Operations performed
