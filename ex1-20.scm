@@ -190,25 +190,31 @@
       (gcd b (remainder a b))))
 
 (gcd 206 40)
-;; is (= 40 0)? no
+;; is (= 40 0)? no - 0 times
 (gcd 40 (remainder 206 40))
-;; is (= 6 0)? no
-(gcd (remainder 206 40) (remainder 40 (remainder 206 40)))
-;; is (= 0 (remainder 40 (remainder 206 40)))? 
+;; to check if (= b 0) remainder is evaulated 1 time
+(gcd (remainder 206 40) (remainder 40 (remainder 206 40))) 
+;; 2 times
 (gcd (remainder 40 (remainder 206 40)) (remainder (remainder 206 40) (remainder 40 (remainder 206 40))))
-;; is (remainder 6 (remainder 40 6)) ie. (= 0 (remainder 6 4))? no
+;; 4 times
 (gcd (remainder (remainder 206 40) (remainder 40 (remainder 206 40))) 
      (remainder (remainder 40 (remainder 206 40))
                 (remainder (remainder 206 40) (remainder 40 (remainder 206 40)))))
-;; (= 0(remainder 4 2)) ? yes
+;; 7 times
+(remainder (remainder 206 40) (remainder 40 (remainder 206 40)))
+;; 4 times
 2
 
-;; So Unique Remainder Operations performed.
+;; Total remainder operations performed
+(+ 1 2 4 7 4)
+;; 18 Remainder Operations performed
+
+;; Also Unique Remainder Operations performed which is the same as Applicative order evaulation
 (remainder 206 40)
 (remainder 40 6)
 (remainder 6 4)
 (remainder 4 2)
 
-;; Total remainder operations performed
-(+ 1 3 6 11)
-;; 21 Remainder Operations performed
+;; Corrected this answer after referring to http://www.billthelizard.com/2009/10/sicp-challenge.html
+
+
