@@ -24,7 +24,7 @@
 
 ;; smallest-divisor procedure is defined in ex21.scm
 (define (prime? n)
-  (= n (smallest-divisor n )))
+  (= n (smallest-divisor n)))
 
 
 (define (search-for-primes range-start range-end)
