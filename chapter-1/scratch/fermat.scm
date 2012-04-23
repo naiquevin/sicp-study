@@ -11,10 +11,20 @@
         ((even? n) (exp (square x) (/ n 2)))
         (else (* x (exp x (- n 1))))))
 
+(define (expmod x n m)
+  (cond ((= n 0) 1)
+        ((even? n) 
+         (remainder 
+          (square (expmod x (/ n 2) m)) 
+          m))
+        (else (remainder 
+               (* x (expmod x (- n 1) m)) 
+               m))))
+
 ;; fermat's test
 (define (fermat n)
   (define (tryit a)
-    (= a (remainder (exp a n) n)))
+    (= a (expmod a n n)))
   (if (> n 1)
       (tryit (+ 1 (random (- n 1))))
       #f))
