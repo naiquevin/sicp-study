@@ -12,7 +12,7 @@
 
 ((average-damp square) 10)
 
-(load "fixedpoint.scm")
+(load "scratch/fixedpoint.scm")
 
 (define (sqrt x)
   (fixed-point 
