@@ -76,9 +76,9 @@
 ;; Observed Pattern
 
 ;; < 4 -> 1
-;; < 8 -> 2
-;; < 16 -> 3
-;; < n -> (floor (log-2 n))
+;; > 4 -> 2
+;; > 8 -> 3
+;; > n -> (floor (log-2 n))
 
 (define (log-to-the-base n)
   (lambda (x)
