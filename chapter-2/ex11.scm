@@ -1,7 +1,13 @@
+;; Exercise 2.11. In passing, Ben also cryptically comments: ``By
+;; testing the signs of the endpoints of the intervals, it is possible
+;; to break mul-interval into nine cases, only one of which requires
+;; more than two multiplications.'' Rewrite this procedure using Ben's
+;; suggestion.
 
+;; load make-interval etc. from ex7 solution
 (load "ex7.scm")
 
-;; The old interval multiplier procedure
+;; The old interval multiplier procedure for reference
 (define (mul-interval-old x y)
   (let ((p1 (* (lower-bound x) (lower-bound y)))
         (p2 (* (lower-bound x) (upper-bound y)))
@@ -38,8 +44,8 @@
 ;;                 |                 |  (max (* x1 y1) (* x2 y2)))
 ;; --------------------------------------------------------------------
 ;; -ve +ve -ve -ve | +ve +ve -ve -ve | (make-interval
-;;                 |                 |  (* (min (abs y1) (abs y2)) x2)
-;;                 |                 |  (* (max (abs y1) (abs y2)) x1))
+;;                 |                 |  (* x2 (min y1 y2))
+;;                 |                 |  (* x1 (min y1 y2)))
 ;; --------------------------------------------------------------------
 ;; -ve -ve +ve +ve | -ve -ve -ve -ve | (make-interval
 ;;                 |                 |  (* (min x1 x2)
@@ -94,10 +100,7 @@
            (two-muls x1 (max y1 y2) x2 (max y1 y2)))
 
           ((and (positive? x2) (all negative? (list x1 y1 y2)))
-           (two-muls (min (abs y1) (abs y2))
-                     x2
-                     (max (abs y1) (abs y2))
-                     x1))
+           (two-muls x2 (min y1 y2) x1 (min y1 y2)))
 
           ((and (all negative? (list x1 x2)) (all positive? (list y1 y2)))
            (two-muls (min x1 x2)
@@ -126,30 +129,39 @@
 
 
 ;; Tests
+;; 1
 (equal? (make-interval 3 8) 
         (mul-interval (make-interval 1 2) (make-interval 3 4)))
 
+;; 2
 (equal? (make-interval -4 8)
         (mul-interval (make-interval -1 2) (make-interval 3 4)))
 
+;; 3
 (equal? (make-interval -8 -3)
         (mul-interval (make-interval -1 -2) (make-interval 3 4)))
 
+;; 4
 (equal? (make-interval -8 -3)
         (mul-interval (make-interval 1 2) (make-interval -4 -3)))
 
-(equal? (make-interval -4 8)
-        (mul-interval (make-interval -1 2) (make-interval 3 4)))
+;; 5
+(equal? (make-interval -8 4)
+        (mul-interval (make-interval -1 2) (make-interval -4 -3)))
 
+;; 6
 (equal? (make-interval -6 8)
         (mul-interval (make-interval -1 2) (make-interval -3 4)))
 
+;; 7
 (equal? (make-interval -6 8)
         (mul-interval (make-interval 1 2) (make-interval -3 4)))
 
+;; 8
 (equal? (make-interval -8 6)
         (mul-interval (make-interval -2 -1) (make-interval -3 4)))
 
+;; 9
 (equal? (make-interval 3 8)
         (mul-interval (make-interval -2 -1) (make-interval -4 -3)))
 
