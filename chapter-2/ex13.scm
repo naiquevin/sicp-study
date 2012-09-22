@@ -6,11 +6,11 @@
 
 (load "ex12.scm")
 
-;; (a . p1), (a . p2)
+;; (a ± p1%), (a ± p2%)
 ;;
 ;; let vp1 = p1/a*100 and vp2 = p2/a*100
 ;;
-;; (a vp1), (b vp2)
+;; (a ± vp1), (b ± vp2)
 ;; (a+vp1, a-vp1), (b+vp2, b-vp2)
 ;; 
 ;; a > b
