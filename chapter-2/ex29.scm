@@ -54,7 +54,7 @@
 (define m2 (make-mobile b3 b4))
 
 
-;; Visualizating of the tree
+;; Visualization of the tree
 
 ;;             [m2]
 ;;             / \
