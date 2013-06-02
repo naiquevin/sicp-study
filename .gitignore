@@ -3,3 +3,5 @@
 *.bci
 *.bin
 *.com
+
+compiled/
