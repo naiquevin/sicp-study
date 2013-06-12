@@ -15,6 +15,11 @@
 
 (require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
 
+(provide outline
+         cross
+         diamond
+         wave)
+
 
 (define outline
   (segments->painter

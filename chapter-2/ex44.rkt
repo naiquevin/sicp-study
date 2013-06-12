@@ -2,6 +2,13 @@
 ;; corner-split. It is similar to right- split, except that it
 ;; switches the roles of below and beside.
 
+#lang racket
+
+(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
+
+(provide up-split)
+
+
 (define (up-split painter n)
   (if (= n 0)
       painter
